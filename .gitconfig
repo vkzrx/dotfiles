@@ -1,0 +1,14 @@
+[user]
+	name = 0xYami
+	email = 0xYami@proton.me
+[core]
+	editor = lvim
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[push]
+	autoSetupRemote = true
