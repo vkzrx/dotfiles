@@ -7,7 +7,7 @@ vim.opt.relativenumber = true
 lvim.log.level = "info"
 lvim.format_on_save = {
   enabled = true,
-  pattern = { "*.ts", "*.tsx", "*.lua" },
+  pattern = { "*.rs", "*.ts", "*.tsx", "*.lua" },
   timeout = 1000,
 }
 
@@ -86,7 +86,7 @@ lvim.builtin.treesitter.auto_install = true
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
 
@@ -151,6 +151,10 @@ lvim.plugins = {
         require("copilot_cmp").setup()
       end, 100)
     end,
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    config = false,
   },
   {
     "ray-x/go.nvim",
@@ -295,3 +299,44 @@ dap.configurations.go = {
     program = "./${relativeFileDirname}"
   }
 }
+
+local status_ok, rust_tools = pcall(require, "rust-tools")
+if not status_ok then
+  print("foo")
+  return
+end
+
+local opts = {
+  tools = {
+    executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
+    reload_workspace_from_cargo_toml = true,
+    inlay_hints = {
+      auto = true,
+      only_current_line = false,
+      show_parameter_hints = false,
+      parameter_hints_prefix = "<-",
+      other_hints_prefix = "=>",
+      max_len_align = false,
+      max_len_align_padding = 1,
+      right_align = false,
+      right_align_padding = 7,
+      highlight = "Comment",
+    },
+    hover_actions = {
+      auto_focus = true,
+    },
+  },
+  server = {
+    on_attach = require("lvim.lsp").common_on_attach,
+    on_init = require("lvim.lsp").common_on_init,
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          command = "clippy"
+        }
+      }
+    },
+  },
+}
+
+rust_tools.setup(opts)
