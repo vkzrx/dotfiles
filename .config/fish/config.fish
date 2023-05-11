@@ -32,6 +32,7 @@ fzf_configure_bindings --directory=\cp
 set fzf_directory_opts --bind "enter:execute(nvim {} &> /dev/tty)+abort"
 
 kubectl completion fish | source
+helm completion fish | source
 
 zoxide init fish | source
 starship init fish | source
