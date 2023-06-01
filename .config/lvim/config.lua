@@ -87,7 +87,7 @@ lvim.builtin.treesitter.auto_install = true
 
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer", "clangd" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
 
@@ -189,8 +189,17 @@ lvim.plugins = {
   {
     "folke/noice.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    config = {
+    opts = {
+      cmdline = {
+        view = "cmdline"
+      },
       lsp = {
+        hover = {
+          enabled = false,
+        },
+        signature = {
+          enabled = false,
+        },
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -201,7 +210,7 @@ lvim.plugins = {
       -- you can enable a preset for easier configuration
       presets = {
         bottom_search = true,         -- use a classic bottom cmdline for search
-        command_palette = true,       -- position the cmdline and popupmenu together
+        command_palette = false,      -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
         inc_rename = false,           -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = false,       -- add a border to hover docs and signature help
