@@ -38,8 +38,11 @@ lvim.keys.normal_mode["<leader>o"] = ":SymbolsOutline<cr>"
 lvim.builtin.which_key.mappings["e"] = nil
 lvim.builtin.which_key.mappings["f"] = nil
 
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+
+lvim.keys.normal_mode["s"] = "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.word_start)<cr>"
+lvim.keys.normal_mode["S"] = "<cmd>lua MiniJump2d.start(MiniJump2d.builtin_opts.line_start)<cr>"
 
 -- -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
@@ -180,11 +183,15 @@ lvim.plugins = {
     end
   },
   {
-    "ggandor/leap.nvim",
-    name = "leap",
+    "echasnovski/mini.nvim",
+    version = false,
     config = function()
-      require("leap").add_default_mappings()
-    end,
+      require("mini.jump2d").setup({
+        view = {
+          dim = true,
+        }
+      })
+    end
   },
   {
     "folke/noice.nvim",
