@@ -30,6 +30,7 @@ alias lg="lazygit"
 
 fzf_configure_bindings --directory=\cp
 set fzf_directory_opts --bind "enter:execute(nvim {} &> /dev/tty)+abort"
+set fzf_fd_opts --type f --hidden --exclude=.git
 
 kubectl completion fish | source
 helm completion fish | source
