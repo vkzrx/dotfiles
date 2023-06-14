@@ -72,6 +72,7 @@ lvim.builtin.cmp.cmdline.enable = true
 lvim.builtin.nvimtree.active = false
 lvim.builtin.project.active = false
 lvim.builtin.breadcrumbs.active = false
+lvim.builtin.bufferline.options.always_show_bufferline = true
 -- lvim.builtin.project.manual_mode = true
 -- lvim.builtin.breadcrumbs.active = false
 
