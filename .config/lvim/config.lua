@@ -192,6 +192,7 @@ lvim.plugins = {
           dim = true,
         }
       })
+      require("mini.bracketed").setup()
     end
   },
   {
