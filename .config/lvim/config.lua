@@ -63,8 +63,6 @@ lvim.builtin.lualine.sections.lualine_a = { "mode" }
 
 -- -- Change theme settings
 lvim.colorscheme = "catppuccin"
--- lvim.colorscheme = "gruvbox-material"
--- vim.g.gruvbox_material_background = "hard"
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -140,7 +138,6 @@ lvim.plugins = {
       require("catppuccin").setup(config)
     end,
   },
-  { "sainnhe/gruvbox-material" },
   { "tpope/vim-surround" },
   {
     "folke/trouble.nvim",
