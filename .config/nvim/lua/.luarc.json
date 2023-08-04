@@ -1,0 +1,16 @@
+{
+    "workspace.library": [
+        "/Users/yami/.config/nvim",
+        "/Users/yami/.local/share/nvim/lazy/lazy.nvim",
+        "/Users/yami/.local/share/nvim/lazy/nvim-lspconfig",
+        "/Users/yami/.local/share/nvim/lazy/plenary.nvim",
+        "/Users/yami/.local/share/nvim/lazy/telescope.nvim",
+        "/Users/yami/.local/share/nvim/lazy/nvim",
+        "/opt/homebrew/Cellar/neovim/0.9.1/share/nvim/runtime",
+        "/opt/homebrew/Cellar/neovim/0.9.1/share/nvim/runtime/pack/dist/opt/matchit",
+        "/opt/homebrew/Cellar/neovim/0.9.1/lib/nvim",
+        "/Users/yami/.local/state/nvim/lazy/readme",
+        "/Users/yami/.local/share/nvim/lazy/nvim/after",
+        "${3rd}/luassert/library"
+    ]
+}

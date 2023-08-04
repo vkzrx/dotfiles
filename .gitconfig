@@ -2,7 +2,7 @@
 	name = 0xYami
 	email = 0xYami@proton.me
 [core]
-	editor = lvim
+	editor = nvim
 [init]
 	defaultBranch = main
 [filter "lfs"]

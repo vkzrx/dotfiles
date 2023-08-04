@@ -1,7 +1,7 @@
 local transparent_background = false
 
-return {
-  flavour = "mocha",   -- Can be one of: latte, frappe, macchiato, mocha
+local config = {
+  flavour = "mocha", -- Can be one of: latte, frappe, macchiato, mocha
   background = { light = "latte", dark = "mocha" },
   dim_inactive = {
     enabled = false,
@@ -11,7 +11,7 @@ return {
     percentage = 0.15,
   },
   transparent_background = transparent_background,
-  show_end_of_buffer = false,   -- show the '~' characters after the end of buffers
+  show_end_of_buffer = false, -- show the '~' characters after the end of buffers
   term_colors = true,
   -- compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
   styles = {
@@ -225,4 +225,14 @@ return {
       }
     end,
   },
+}
+
+return {
+  'catppuccin/nvim',
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require('catppuccin').setup(config)
+    vim.cmd([[colorscheme catppuccin]])
+  end
 }
