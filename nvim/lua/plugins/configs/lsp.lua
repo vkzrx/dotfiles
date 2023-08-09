@@ -30,34 +30,35 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 local lspconfig = require('lspconfig')
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-lspconfig.lua_ls.setup({
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-        -- https://github.com/folke/neodev.nvim/issues/88
-        checkThirdParty = false,
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = { 'tsserver', 'astro', 'lua_ls', 'svelte' },
+  handlers = {
+    function(server)
+      lspconfig[server].setup({})
+    end,
+    ['lua_ls'] = function()
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              globals = { 'vim' },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file('', true),
+              -- https://github.com/folke/neodev.nvim/issues/88
+              checkThirdParty = false,
+            },
+            telemetry = {
+              enable = false,
+            },
+          },
+        },
+      })
+    end
+  }
 })
-
-local servers = { 'tsserver', 'astro', }
-
-for _, server in ipairs(servers) do
-  lspconfig[server].setup({
-    capabilities = capabilities,
-  })
-end

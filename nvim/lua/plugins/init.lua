@@ -4,7 +4,7 @@ require('lazy').setup({
     lazy = false,
     priority = 1000,
     config = function()
-      local options = require("plugins.configs.colorscheme")
+      local options = require('plugins.configs.colorscheme')
       require('catppuccin').setup(options)
       vim.cmd([[colorscheme catppuccin]])
     end
@@ -12,6 +12,12 @@ require('lazy').setup({
   {
     'neovim/nvim-lspconfig',
     dependencies = {
+      {
+        'williamboman/mason.nvim',
+        cmd = { 'Mason' },
+        config = true
+      },
+      'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', tag = 'legacy', event = 'LspAttach', opts = {} },
       'folke/neodev.nvim',
     },
