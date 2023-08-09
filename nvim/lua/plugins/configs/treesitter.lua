@@ -1,5 +1,5 @@
 local options = {
-  ensure_installed = { 'typescript', 'tsx', 'javascript', 'rust', 'go', 'lua', 'json', 'vim', 'vimdoc' },
+  ensure_installed = { 'typescript', 'tsx', 'javascript', 'astro', 'svelte', 'rust', 'go', 'lua', 'json', 'vim', 'vimdoc' },
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
   -- Automatically install missing parsers when entering buffer
