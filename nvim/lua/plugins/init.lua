@@ -83,13 +83,29 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-file-browser.nvim' },
     keys = {
-      { '<C-p>',      '<cmd>Telescope find_files<cr>', 'Search files' },
-      { '<leader>fw', '<cmd>Telescope live_grep<cr>',  'Search expression' },
+      { '<C-p>',      '<cmd>Telescope find_files<cr>',   'Search files' },
+      { '<C-n>',      '<cmd>Telescope file_browser<cr>', 'Toggle file browser' },
+      { '<leader>fw', '<cmd>Telescope live_grep<cr>',    'Search expression' },
     },
-    opts = function()
-      return require('plugins.configs.telescope')
+    config = function()
+      require('telescope').setup({
+        extensions = {
+          file_browser = {
+            theme = 'dropdown'
+          },
+        },
+        pickers = {
+          find_files = {
+            theme = 'dropdown',
+          },
+          live_grep = {
+            theme = 'dropdown',
+          },
+        },
+      })
+      require('telescope').load_extension('file_browser')
     end
   },
   {
@@ -139,20 +155,6 @@ require('lazy').setup({
         'Toggle Flash Search'
       },
     },
-  },
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'MunifTanjim/nui.nvim',
-    },
-    keys = {
-      { '<C-n>', '<cmd>Neotree toggle position=left<cr>', desc = 'Toggle NeoTree on the left', },
-    },
-    opts = function()
-      return require('plugins.configs.neo-tree')
-    end
   },
   { 'nvim-lualine/lualine.nvim',   opts = {} },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
