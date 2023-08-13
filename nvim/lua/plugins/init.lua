@@ -83,30 +83,51 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-file-browser.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      { '<C-p>',      '<cmd>Telescope find_files<cr>',   'Search files' },
-      { '<C-n>',      '<cmd>Telescope file_browser<cr>', 'Toggle file browser' },
-      { '<leader>fw', '<cmd>Telescope live_grep<cr>',    'Search expression' },
+      { '<C-p>',      '<cmd>Telescope find_files<cr>', 'Search files' },
+      { '<leader>fw', '<cmd>Telescope live_grep<cr>',  'Search expression' },
     },
-    config = function()
-      require('telescope').setup({
-        extensions = {
-          file_browser = {
-            theme = 'dropdown'
-          },
+    opts = {
+      pickers = {
+        find_files = {
+          theme = 'dropdown',
         },
-        pickers = {
-          find_files = {
-            theme = 'dropdown',
-          },
-          live_grep = {
-            theme = 'dropdown',
-          },
+        live_grep = {
+          theme = 'dropdown',
         },
-      })
-      require('telescope').load_extension('file_browser')
-    end
+      },
+    },
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
+    keys = {
+      { '<C-n>', '<cmd>Neotree toggle position=float<cr>', 'Toggle file browser' },
+    },
+    opts = {
+      popup_border_style = 'rounded',
+      filesystem = {
+        window = {
+          popup = {
+            position = { col = "100%", row = "2" },
+            size = function(state)
+              local root_name = vim.fn.fnamemodify(state.path, ":~")
+              local root_len = string.len(root_name) + 4
+              return {
+                width = math.max(root_len, 50),
+                height = vim.o.lines - 6
+              }
+            end
+          },
+        }
+      }
+    },
   },
   {
     'kdheepak/lazygit.nvim',
@@ -159,4 +180,8 @@ require('lazy').setup({
   { 'nvim-lualine/lualine.nvim',   opts = {} },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
   'lukas-reineke/indent-blankline.nvim',
+}, {
+  ui = {
+    border = 'rounded',
+  }
 })
