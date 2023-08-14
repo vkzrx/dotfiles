@@ -1,7 +1,8 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
-vim.api.nvim_create_autocmd('BufWritePre', {
+-- format on save
+autocmd('BufWritePre', {
   callback = function()
     vim.lsp.buf.format { async = false }
   end
@@ -13,7 +14,7 @@ autocmd('BufWritePre', {
   command = ':%s/\\s\\+$//e'
 })
 
--- Don't auto commenting new lines
+-- Don't auto comment new lines
 autocmd('BufEnter', {
   pattern = '',
   command = 'set fo-=c fo-=r fo-=o'
