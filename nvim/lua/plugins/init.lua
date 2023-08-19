@@ -141,8 +141,9 @@ require('lazy').setup({
   { 'lewis6991/gitsigns.nvim', opts = {} },
   {
     'echasnovski/mini.nvim',
-    version = '*',
+    version = false,
     config = function()
+      require('mini.starter').setup()
       require('mini.surround').setup()
       require('mini.pairs').setup()
       require('mini.comment').setup()
