@@ -8,3 +8,4 @@ ln -sn $BASE_PATH/alacritty ~/.config/alacritty
 ln -sn $BASE_PATH/nvim ~/.config/nvim
 ln -sn $BASE_PATH/erdtree ~/.config/erdtree
 ln -sn $BASE_PATH/fish ~/.config/fish
+ln -sn $BASE_PATH/bat ~/.config/bat
