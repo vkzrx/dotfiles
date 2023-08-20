@@ -15,7 +15,11 @@ require('lazy').setup({
       {
         'williamboman/mason.nvim',
         cmd = { 'Mason' },
-        config = true
+        opts = {
+          ui = {
+            border = "rounded"
+          }
+        }
       },
       'williamboman/mason-lspconfig.nvim',
       { 'j-hui/fidget.nvim', tag = 'legacy', event = 'LspAttach', opts = {} },
@@ -147,6 +151,7 @@ require('lazy').setup({
       require('mini.surround').setup()
       require('mini.pairs').setup()
       require('mini.comment').setup()
+      require('mini.sessions').setup()
     end
   },
   { 'folke/trouble.nvim' },
