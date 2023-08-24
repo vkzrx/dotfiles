@@ -16,7 +16,7 @@ $ chsh -s $(which fish)
 | CLI         | Minimum version required | Description                                |
 | ----------- | ------------------------ | ------------------------------------------ |
 | [exa]       | 0.10.0                   | Modern replacement for `ls`                |
-| [erdtree]   | 1.7.0                    | Faster and colorized `tree`                |
+| [erdtree]   | 3.1.2                    | Faster and colorized `tree`                |
 | [bat]       | 0.16.0                   | Smarter `cat` with syntax highlighting     |
 | [ripgrep]   | 13.0.0                   | Faster alternative to `grep`               |
 | [fd]        | 8.7.0                    | Faster and colorized alternative to `find` |
