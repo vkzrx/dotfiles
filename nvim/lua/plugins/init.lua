@@ -10,6 +10,19 @@ require('lazy').setup({
     end
   },
   {
+    'rebelot/kanagawa.nvim',
+    lazy = true,
+    opts = {
+      background = {
+        dark = "wave",
+        light = "lotus",
+      }
+    },
+    -- config = function()
+    --   vim.cmd([[colorscheme kanagawa]])
+    -- end
+  },
+  {
     'neovim/nvim-lspconfig',
     dependencies = {
       {
@@ -72,7 +85,9 @@ require('lazy').setup({
           suggestion = { enabled = false },
           panel = { enabled = false },
         })
-        require('copilot_cmp').setup()
+        require('copilot_cmp').setup({
+          fix_pairs = true,
+        })
       end, 100)
     end,
   },
@@ -150,11 +165,13 @@ require('lazy').setup({
       require('mini.starter').setup()
       require('mini.surround').setup()
       require('mini.pairs').setup()
+      require('mini.bracketed').setup()
       require('mini.comment').setup()
       require('mini.sessions').setup()
     end
   },
   { 'folke/trouble.nvim' },
+  { 'simrat39/rust-tools.nvim' },
   {
     'ray-x/lsp_signature.nvim',
     event = 'VeryLazy',

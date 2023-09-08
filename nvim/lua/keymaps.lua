@@ -15,8 +15,11 @@ map('i', 'jk', '<esc>')
 map('i', 'jj', '<esc>')
 
 -- normal
+map('n', 'j', 'gj')
+map('n', 'k', 'gk')
 map('n', '<leader>w', ':w<cr>')
 map('n', '<leader>q', ':q<cr>')
+map('n', '<leader>h', ':noh<cr>')
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-l>', '<C-w>l')
 map('n', 'n', 'nzz')

@@ -34,15 +34,19 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { 'tsserver', 'astro', 'lua_ls', 'svelte' },
+  ensure_installed = { 'tsserver', 'astro', 'svelte', 'rust_analyzer', 'lua_ls' },
   handlers = {
     function(server)
       lspconfig[server].setup({
         capabilities = capabilities,
       })
     end,
+    ["rust_analyzer"] = function()
+      require("rust-tools").setup {}
+    end,
     ['lua_ls'] = function()
       lspconfig.lua_ls.setup({
+        capabilities = capabilities,
         settings = {
           Lua = {
             runtime = {

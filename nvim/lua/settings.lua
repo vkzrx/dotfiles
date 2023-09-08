@@ -18,4 +18,4 @@ opt.expandtab = true      -- Use spaces instead of tabs
 opt.shiftwidth = 2        -- Number of spaces to use for autoindent
 opt.tabstop = 2           -- Number of spaces that a <Tab> in the file counts for
 opt.smartindent = true    -- Insert indents automatically
-opt.wrap = false          -- Disable line wrap
+opt.wrap = true           -- Disable line wrap

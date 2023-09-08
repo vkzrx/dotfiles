@@ -24,6 +24,8 @@ local options = {
   },
   autotag = {
     enable = true,
+    -- https://github.com/windwp/nvim-ts-autotag/issues/125
+    enable_close_on_slash = false,
   },
 }
 
