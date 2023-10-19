@@ -48,7 +48,6 @@ require('lazy').setup({
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-path',
       {
         'L3MON4D3/LuaSnip',
@@ -104,8 +103,10 @@ require('lazy').setup({
     branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      { '<C-p>',      '<cmd>Telescope find_files<cr>', 'Search files' },
-      { '<leader>fw', '<cmd>Telescope live_grep<cr>',  'Search expression' },
+      { '<C-p>',      '<cmd>Telescope find_files<cr>',                'Search files' },
+      { '<leader>fw', '<cmd>Telescope live_grep<cr>',                 'Search expression' },
+      { '<leader>b',  '<cmd>Telescope buffers<cr>',                   'Find buffers' },
+      { '<leader>fb', '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Fuzzy find current buffer' },
     },
     opts = {
       pickers = {
@@ -117,6 +118,32 @@ require('lazy').setup({
         },
       },
     },
+  },
+  {
+    'simrat39/symbols-outline.nvim',
+    opts = {},
+    keys = {
+      { '<leader>ts', '<cmd>SymbolsOutline<cr>', 'Toggle symbols tree' },
+    },
+  },
+  {
+    'ray-x/go.nvim',
+    dependencies = {
+      'ray-x/guihua.lua',
+      'neovim/nvim-lspconfig',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('go').setup()
+    end,
+    event = { 'CmdlineEnter' },
+    ft = { 'go', 'gomod' },
+  },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    opts = {},
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -144,8 +171,18 @@ require('lazy').setup({
               }
             end
           },
-        }
-      }
+        },
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = true,
+        },
+        buffers = {
+          follow_current_file = {
+            enabled = true,
+            leave_dirs_open = true,
+          },
+        },
+      },
     },
   },
   {
@@ -178,27 +215,7 @@ require('lazy').setup({
     opts = {},
   },
   {
-    'akinsho/bufferline.nvim',
-    version = '*',
-    opts = {},
-  },
-  {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    keys = {
-      { 'gs', mode = { 'n', 'x', 'o' }, function() require('flash').jump() end,              desc = 'Flash' },
-      { 'gS', mode = { 'n', 'o', 'x' }, function() require('flash').treesitter() end,        desc = 'Flash Treesitter' },
-      { 'r',  mode = 'o',               function() require('flash').remote() end,            desc = 'Remote Flash' },
-      { 'R',  mode = { 'o', 'x' },      function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
-      {
-        '<c-s>',
-        mode = { 'c' },
-        function() require('flash').toggle() end,
-        desc =
-        'Toggle Flash Search'
-      },
-    },
+    'ThePrimeagen/harpoon',
   },
   { 'nvim-lualine/lualine.nvim',   opts = {} },
   { 'nvim-tree/nvim-web-devicons', lazy = true },

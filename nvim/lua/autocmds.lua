@@ -8,6 +8,14 @@ autocmd('BufWritePre', {
   end
 })
 
+autocmd('BufWritePre', {
+  pattern = "*.go",
+  callback = function()
+    require('go.format').goimport()
+  end,
+  group = vim.api.nvim_create_augroup("GoFormat", {})
+})
+
 -- Remove whitespace on save
 autocmd('BufWritePre', {
   pattern = '',
@@ -26,4 +34,9 @@ autocmd('Filetype', {
   group = 'setIndent',
   pattern = { 'typescript', 'javascript', 'html', 'css', 'scss', 'json', 'yaml', 'lua' },
   command = 'setlocal shiftwidth=2 tabstop=2'
+})
+autocmd('Filetype', {
+  group = 'setIndent',
+  pattern = { 'go' },
+  command = 'setlocal shiftwidth=4 tabstop=4'
 })

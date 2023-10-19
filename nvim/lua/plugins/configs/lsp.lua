@@ -31,6 +31,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local lspconfig = require('lspconfig')
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.offsetEncoding = { 'utf-16' }
 
 require('mason').setup()
 require('mason-lspconfig').setup({
@@ -43,6 +44,21 @@ require('mason-lspconfig').setup({
     end,
     ["rust_analyzer"] = function()
       require("rust-tools").setup {}
+    end,
+    ['zls'] = function()
+      lspconfig.zls.setup({
+        capabilities = capabilities,
+        default_config = {
+          filetypes = { 'zig', 'zir' },
+          root_dir = function(fname)
+            return lspconfig.util.root_pattern("zls.json", ".git")(fname) or lspconfig.util.path.dirname(fname)
+          end,
+          cmd = {
+            'zls',
+            '--offset-encoding=utf-16',
+          },
+        },
+      })
     end,
     ['lua_ls'] = function()
       lspconfig.lua_ls.setup({
