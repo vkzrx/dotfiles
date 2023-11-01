@@ -20,9 +20,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
-    vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-    vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
-
     vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
@@ -37,14 +34,6 @@ require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = { 'tsserver', 'astro', 'svelte', 'rust_analyzer', 'lua_ls' },
   handlers = {
-    function(server)
-      lspconfig[server].setup({
-        capabilities = capabilities,
-      })
-    end,
-    ["rust_analyzer"] = function()
-      require("rust-tools").setup {}
-    end,
     ['zls'] = function()
       lspconfig.zls.setup({
         capabilities = capabilities,
@@ -60,28 +49,5 @@ require('mason-lspconfig').setup({
         },
       })
     end,
-    ['lua_ls'] = function()
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file('', true),
-              -- https://github.com/folke/neodev.nvim/issues/88
-              checkThirdParty = false,
-            },
-            telemetry = {
-              enable = false,
-            },
-          },
-        },
-      })
-    end
   }
 })

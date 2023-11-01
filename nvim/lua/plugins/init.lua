@@ -23,24 +23,56 @@ require('lazy').setup({
     -- end
   },
   {
-    'neovim/nvim-lspconfig',
+    'VonHeikemen/lsp-zero.nvim',
     dependencies = {
-      {
-        'williamboman/mason.nvim',
-        cmd = { 'Mason' },
-        opts = {
-          ui = {
-            border = "rounded"
-          }
-        }
-      },
-      'williamboman/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig',
       { 'j-hui/fidget.nvim', tag = 'legacy', event = 'LspAttach', opts = {} },
-      'folke/neodev.nvim',
     },
     config = function()
-      require('plugins.configs.lsp')
-    end
+      local lsp_zero = require('lsp-zero')
+
+      lsp_zero.set_preferences({
+        call_servers = 'global',
+      })
+
+      lsp_zero.configure('lua_ls', {
+        settings = {
+          Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              globals = { 'vim' },
+            },
+            telemetry = {
+              enable = false,
+            },
+          },
+        },
+      })
+
+      lsp_zero.setup_servers({
+        'lua_ls',
+        'gopls',
+        'tsserver',
+        'tailwindcss',
+        'clangd',
+      })
+
+      lsp_zero.on_attach(function(client, bufnr)
+        client.server_capabilities.semanticTokensProvider = nil
+
+        lsp_zero.default_keymaps({ buffer = bufnr })
+
+        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
+        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help,
+          { border = 'single' })
+      end)
+
+      lsp_zero.setup()
+
+      require('rust-tools').setup()
+    end,
   },
   {
     'hrsh7th/nvim-cmp',
@@ -75,20 +107,20 @@ require('lazy').setup({
     end
   },
   {
-    'zbirenbaum/copilot-cmp',
-    event = 'InsertEnter',
-    dependencies = { 'zbirenbaum/copilot.lua' },
-    config = function()
-      vim.defer_fn(function()
-        require('copilot').setup({
-          suggestion = { enabled = false },
-          panel = { enabled = false },
-        })
-        require('copilot_cmp').setup({
-          fix_pairs = true,
-        })
-      end, 100)
-    end,
+    -- 'zbirenbaum/copilot-cmp',
+    -- event = 'InsertEnter',
+    -- dependencies = { 'zbirenbaum/copilot.lua' },
+    -- config = function()
+    --   vim.defer_fn(function()
+    --     require('copilot').setup({
+    --       suggestion = { enabled = false },
+    --       panel = { enabled = false },
+    --     })
+    --     require('copilot_cmp').setup({
+    --       fix_pairs = true,
+    --     })
+    --   end, 100)
+    -- end,
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -143,7 +175,14 @@ require('lazy').setup({
     'akinsho/bufferline.nvim',
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
-    opts = {},
+    config = function()
+      local bufferline = require('bufferline')
+      bufferline.setup({
+        options = {
+          style_preset = bufferline.style_preset.no_italic,
+        },
+      })
+    end,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
