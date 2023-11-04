@@ -27,8 +27,8 @@ map('n', 'N', 'Nzz')
 map('n', '<C-o>', '<C-o>zz')
 map('n', '<leader>x', ':bd<cr>')
 -- lsp
-map('n', '[d', vim.diagnostic.goto_prev)
-map('n', ']d', vim.diagnostic.goto_next)
+map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
+map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
 -- trouble
 map('n', '<leader>tt', '<cmd>TroubleToggle<cr>')
 -- bufferline

@@ -22,58 +22,7 @@ require('lazy').setup({
     --   vim.cmd([[colorscheme kanagawa]])
     -- end
   },
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      { 'j-hui/fidget.nvim', tag = 'legacy', event = 'LspAttach', opts = {} },
-    },
-    config = function()
-      local lsp_zero = require('lsp-zero')
-
-      lsp_zero.set_preferences({
-        call_servers = 'global',
-      })
-
-      lsp_zero.configure('lua_ls', {
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            telemetry = {
-              enable = false,
-            },
-          },
-        },
-      })
-
-      lsp_zero.setup_servers({
-        'lua_ls',
-        'gopls',
-        'tsserver',
-        'tailwindcss',
-        'clangd',
-      })
-
-      lsp_zero.on_attach(function(client, bufnr)
-        client.server_capabilities.semanticTokensProvider = nil
-
-        lsp_zero.default_keymaps({ buffer = bufnr })
-
-        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help,
-          { border = 'single' })
-      end)
-
-      lsp_zero.setup()
-
-      require('rust-tools').setup()
-    end,
-  },
+  require('plugins.configs.lsp'),
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
