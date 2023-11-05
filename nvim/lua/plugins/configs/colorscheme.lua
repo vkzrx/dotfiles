@@ -213,7 +213,7 @@ local config = {
         -- ["@constructor.typescript"] = { fg = cp.lavender },
 
         -- ["@constructor.tsx"] = { fg = cp.lavender },
-        -- ["@tag.attribute.tsx"] = { fg = cp.mauve },
+        ["@tag.attribute.tsx"] = { fg = cp.mauve, style = {} },
 
         ["@type.css"] = { fg = cp.lavender },
         ["@property.css"] = { fg = cp.yellow },
