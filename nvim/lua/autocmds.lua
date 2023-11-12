@@ -1,13 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
--- format on save
--- autocmd('BufWritePre', {
---   callback = function()
---     vim.lsp.buf.format { async = false }
---   end
--- })
-
 autocmd('BufWritePre', {
   pattern = "*.go",
   callback = function()
