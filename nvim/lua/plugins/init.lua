@@ -202,9 +202,6 @@ require('lazy').setup({
     event = 'VeryLazy',
     opts = {},
   },
-  {
-    'ThePrimeagen/harpoon',
-  },
   { 'nvim-lualine/lualine.nvim',   opts = {} },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
   'lukas-reineke/indent-blankline.nvim',

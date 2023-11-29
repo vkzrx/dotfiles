@@ -34,11 +34,6 @@ map('n', '<leader>tt', '<cmd>TroubleToggle<cr>')
 -- bufferline
 map('n', 'L', '<cmd>BufferLineCycleNext<cr>')
 map('n', 'H', '<cmd>BufferLineCyclePrev<cr>')
--- harpoon
-map('n', '<leader>a', ':lua require("harpoon.mark").add_file()<cr>', { silent = false })
-map('n', '<leader>A', ':lua require("harpoon.ui").toggle_quick_menu()<cr>')
-map('n', '<leader>J', '<cmd>lua require("harpoon.ui").nav_prev()<cr>')
-map('n', '<leader>K', '<cmd>lua require("harpoon.ui").nav_next()<cr>')
 
 -- visual
 map('v', '<C-y>', '"*y')
